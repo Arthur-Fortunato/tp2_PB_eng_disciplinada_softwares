@@ -37,4 +37,10 @@ public class AutenticationPage {
     public boolean erroVisivel() {
         return !driver.findElements(mensagemErro).isEmpty();
     }
+
+    public String getMensagemValidacaoEmailSignup() {
+        return driver
+                .findElement(inputSignupEmail)
+                .getAttribute("validationMessage");
+    }
 }
