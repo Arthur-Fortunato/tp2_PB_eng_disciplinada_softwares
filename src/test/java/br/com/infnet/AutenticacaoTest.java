@@ -2,6 +2,8 @@ package br.com.infnet;
 
 import br.com.infnet.pages.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -60,6 +62,20 @@ public class AutenticacaoTest extends BaseTest {
         AutenticationPage login = home.clicarNoLinkSignup();
         login.preencherLogin("email_randomqnexiste@teste.com", "senhadoida");
         assertTrue(login.erroVisivel(), "Deve aparecer a mensagem de erro 'Your email or password is incorrect!'");
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "email_inexistente@teste.com, senhaerrada",
+            "teste@teste.com, 123",
+            "123456789@teste.com, 11111"
+    })
+    void naoDevePermitirLoginComCredenciaisInvalidas(String email, String senha) {
+        HomePage home = new HomePage(driver);
+        AutenticationPage login = home.clicarNoLinkSignup();
+
+        login.preencherLogin(email, senha);
+        assertTrue(login.erroVisivel(),"Deveria exibir mensagem de erro para login inválido");
     }
 
 }
