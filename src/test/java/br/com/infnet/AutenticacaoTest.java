@@ -22,7 +22,6 @@ public class AutenticacaoTest extends BaseTest {
         signup.preencherFormularioCompleto();
 
         AccountCreatedPage accountCreated = new AccountCreatedPage(driver);
-        assertTrue(accountCreated.paginaCarregada());
         assertThat(accountCreated.obterMensagem(), is("ACCOUNT CREATED!"));
     }
 

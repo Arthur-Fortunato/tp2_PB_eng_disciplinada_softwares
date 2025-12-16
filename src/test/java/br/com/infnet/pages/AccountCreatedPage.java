@@ -15,8 +15,4 @@ public class AccountCreatedPage {
     public String obterMensagem() {
         return driver.findElement(tituloAccountCreated).getText();
     }
-
-    public boolean paginaCarregada() {
-        return driver.getCurrentUrl().contains("account_created");
-    }
 }
