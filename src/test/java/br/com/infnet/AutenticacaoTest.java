@@ -56,19 +56,11 @@ public class AutenticacaoTest extends BaseTest {
         assertTrue(loggedPage.usuarioLogado(),"O Usuário deveria estar logado.");
     }
 
-    @Test
-    void deveExibirErroComLoginInvalido() {
-        HomePage home = new HomePage(driver);
-        AutenticationPage login = home.clicarNoLinkSignup();
-        login.preencherLogin("email_randomqnexiste@teste.com", "senhadoida");
-        assertTrue(login.erroVisivel(), "Deve aparecer a mensagem de erro 'Your email or password is incorrect!'");
-    }
-
     @ParameterizedTest
     @CsvSource({
-            "email_inexistente@teste.com, senhaerrada",
-            "teste@teste.com, 123",
-            "123456789@teste.com, 11111"
+            "email_q_com_crtz_n_existe@teste.com, senhaerrada",
+            "outro_emailqTbmNExiste@teste.com, 123",
+            "oUltimo_emAil_qNExiste@teste.com, 11111"
     })
     void naoDevePermitirLoginComCredenciaisInvalidas(String email, String senha) {
         HomePage home = new HomePage(driver);
